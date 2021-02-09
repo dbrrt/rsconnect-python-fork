@@ -51,7 +51,7 @@ def _create_ssl_connection(host_name, port, disable_tls_check, ca_data, timeout)
             host_name,
             port=(port or http.HTTPS_PORT),
             timeout=timeout,
-            context=ssl._create_unverified_context()
+            context=ssl._create_unverified_context(),
         )
     elif disable_tls_check:
         # noinspection PyProtectedMember
