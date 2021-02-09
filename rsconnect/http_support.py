@@ -64,11 +64,11 @@ def _create_ssl_connection(host_name, port, disable_tls_check, ca_data, timeout)
         raise ValueError("Cannot both disable TLS checking and provide a custom certificate")
     if ca_data is not None:
         return http.HTTPSConnection(
-                host_name,
-                port=(port or http.HTTPS_PORT),
-                timeout=timeout,
-                context=ssl._create_unverified_context(),
-            )
+            host_name,
+            port=(port or http.HTTPS_PORT),
+            timeout=timeout,
+            context=ssl.create_default_context(cadata=ca_data),
+        )
     elif disable_tls_check:
         proxyHost, proxyPort = _get_proxy()
         if proxyHost is not None:
